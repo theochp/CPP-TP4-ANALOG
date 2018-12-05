@@ -1,7 +1,9 @@
+using namespace std;
+
 #include "AnalogApp.h"
 
 int main(int argc, char *argv[])
 {
-    AnalogApp app;
-    return app.Run(argc, argv);
+    AnalogApp app(argc, argv);
+    return app.Run();
 }

@@ -22,12 +22,12 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-int AnalogApp::Run ( const int argc, char *argv[] )
+int AnalogApp::Run ( )
 // Algorithme :
 //
 {
     return 0;
-} //----- Fin de Méthode
+} //----- Fin de Run
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -49,13 +49,18 @@ AnalogApp::AnalogApp ( const AnalogApp & unAnalogApp )
 } //----- Fin de AnalogApp (constructeur de copie)
 
 
-AnalogApp::AnalogApp ( )
+AnalogApp::AnalogApp ( const int argc, char *argv[]  ) 
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <AnalogApp>" << endl;
 #endif
+    vector<string> args;
+    for(int i = 0; i < argc; ++i) {
+        args.push_back(string(argv[i]));
+    }
+    parseArgs(args);
 } //----- Fin de AnalogApp
 
 
@@ -72,4 +77,31 @@ AnalogApp::~AnalogApp ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+void AnalogApp::parseArgs ( const vector<string>& args ) 
+// Algorithme :
+//
+{
+    bool shouldExpectOptionArg = false;
 
+    for(auto it = args.begin(); it != args.end(); ++it)
+    {
+        const string& arg = *it;
+        if(arg[0] == '-') {
+            shouldExpectOptionArg = true;
+            string argName = arg.substr(1);
+            AppOption option(argName);
+            options.push_back(option);
+        } else if(shouldExpectOptionArg) {
+            //bool added = option.AddArgument("blabla");
+            if(!added) {
+                //l'option n'accepte pas plus d'arguments
+                //il faut donc considerer cette chaine comme le nom du fichier
+                // a ouvrir
+            }
+            // soit l'option accepte 1 ou plusieurs arguments, et on continue, 
+            // soit il faut aller dans le else
+        } else {
+            // c'est le nom du fichier à charger
+        }
+    }
+} //----- Fin de parseArgs

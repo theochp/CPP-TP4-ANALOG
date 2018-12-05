@@ -1,44 +1,46 @@
 /*************************************************************************
-                           AnalogApp  -  description
+                           AppOption  -  description
                              -------------------
     début                : 05/12/2018
     copyright            : (C) 2018 par Théo Champion
     e-mail               : theo.champion@insa-lyon.fr
 *************************************************************************/
 
-//---------- Interface de la classe <AnalogApp> (fichier AnalogApp.h) ----------------
-#if ! defined ( AnalogApp_H )
-#define AnalogApp_H
+//---------- Interface de la classe <AppOption> (fichier AppOption.h) ----------------
+#if ! defined ( AppOption_H )
+#define AppOption_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include <vector>
 #include <string>
-#include "AppOption.h"
+
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <AnalogApp>
+// Rôle de la classe <AppOption>
 //
-//
+// Gère les options passées en paramètres du main. Lors de la création
+// d'une option, la classe sait combien de paramètres cette option accepte
+// et adapte le comportement de AddArgument en conséquence
 //------------------------------------------------------------------------
 
-class AnalogApp
+class AppOption
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    int Run ( );
+    bool AddArgument ( string argument );
     // Mode d'emploi :
-    //
+    // 
     // Contrat :
     //
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    AnalogApp & operator = ( const AnalogApp & unAnalogApp );
+    AppOption & operator = ( const AppOption & unAppOption );
     // Mode d'emploi :
     //
     // Contrat :
@@ -46,19 +48,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    AnalogApp ( const AnalogApp & unAnalogApp );
+    AppOption ( const AppOption & unAppOption );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    AnalogApp ( const int argc, char *argv[] );
+    AppOption ( const string name );
     // Mode d'emploi :
     //
     // Contrat :
-    //  argv doit être un tableau de chaînes de caractères de taille argc
+    //
 
-    virtual ~AnalogApp ( );
+    virtual ~AppOption ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,17 +70,14 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-    void parseArgs ( const vector<string>& args );
-    // Mode d'emploi :
-        //
-        // Contrat :
-        //
 
 //----------------------------------------------------- Attributs protégés
-vector<AppOption> options;
+vector<string> arguments;
+const string name;
+int acceptedArguments;
 };
 
-//-------------------------------- Autres définitions dépendantes de <AnalogApp>
+//-------------------------------- Autres définitions dépendantes de <AppOption>
 
-#endif // AnalogApp_H
+#endif // AppOption_H
 
