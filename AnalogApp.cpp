@@ -35,6 +35,15 @@ AnalogApp & AnalogApp::operator = ( const AnalogApp & unAnalogApp )
 // Algorithme :
 //
 {
+    targetFile = unAnalogApp.targetFile;
+
+    // écrasement des options
+    for(auto it = options.begin(); it != options.end(); ++it) {
+        delete *it;
+    }
+    for(auto it = unAnalogApp.options.begin(); it != unAnalogApp.options.end(); ++it) {
+        options.push_back(new AppOption(**it));
+    }
 } //----- Fin de operator =
 
 
@@ -46,6 +55,10 @@ AnalogApp::AnalogApp ( const AnalogApp & unAnalogApp )
 #ifdef MAP
     cout << "Appel au constructeur de copie de <AnalogApp>" << endl;
 #endif
+    targetFile = unAnalogApp.targetFile;
+    for(auto it = unAnalogApp.options.begin(); it != unAnalogApp.options.end(); ++it) {
+        options.push_back(new AppOption(**it));
+    }
 } //----- Fin de AnalogApp (constructeur de copie)
 
 
@@ -71,6 +84,9 @@ AnalogApp::~AnalogApp ( )
 #ifdef MAP
     cout << "Appel au destructeur de <AnalogApp>" << endl;
 #endif
+    for(auto it = options.begin(); it != options.end(); ++it) {
+        delete *it;
+    }
 } //----- Fin de ~AnalogApp
 
 
@@ -86,22 +102,20 @@ void AnalogApp::parseArgs ( const vector<string>& args )
     for(auto it = args.begin(); it != args.end(); ++it)
     {
         const string& arg = *it;
+        AppOption *lastAddedOption = nullptr;
         if(arg[0] == '-') {
             shouldExpectOptionArg = true;
             string argName = arg.substr(1);
-            AppOption option(argName);
+            AppOption *option = new AppOption(argName);
             options.push_back(option);
         } else if(shouldExpectOptionArg) {
-            //bool added = option.AddArgument("blabla");
+            bool added = lastAddedOption->AddArgument(arg);
             if(!added) {
-                //l'option n'accepte pas plus d'arguments
-                //il faut donc considerer cette chaine comme le nom du fichier
-                // a ouvrir
+                targetFile = arg;
+                shouldExpectOptionArg = false;
             }
-            // soit l'option accepte 1 ou plusieurs arguments, et on continue, 
-            // soit il faut aller dans le else
         } else {
-            // c'est le nom du fichier à charger
+            targetFile = arg;
         }
     }
 } //----- Fin de parseArgs

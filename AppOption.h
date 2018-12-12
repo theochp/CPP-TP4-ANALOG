@@ -40,12 +40,6 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    AppOption & operator = ( const AppOption & unAppOption );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
 //-------------------------------------------- Constructeurs - destructeur
     AppOption ( const AppOption & unAppOption );

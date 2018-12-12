@@ -37,21 +37,17 @@ bool AppOption::AddArgument ( string argument )
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-AppOption & AppOption::operator = ( const AppOption & unAppOption )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
 
 //-------------------------------------------- Constructeurs - destructeur
-AppOption::AppOption ( const AppOption & unAppOption )
+AppOption::AppOption ( const AppOption & unAppOption ) : name(unAppOption.name)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <AppOption>" << endl;
 #endif
+    arguments = unAppOption.arguments;
+    acceptedArguments = unAppOption.acceptedArguments;
 } //----- Fin de AppOption (constructeur de copie)
 
 

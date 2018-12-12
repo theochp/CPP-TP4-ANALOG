@@ -75,7 +75,8 @@ protected:
         //
 
 //----------------------------------------------------- Attributs protégés
-vector<AppOption> options;
+vector<AppOption*> options;
+string targetFile;
 };
 
 //-------------------------------- Autres définitions dépendantes de <AnalogApp>
