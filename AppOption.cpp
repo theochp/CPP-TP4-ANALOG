@@ -26,7 +26,7 @@ bool AppOption::AddArgument ( string argument )
 // Algorithme :
 //
 {
-    if(arguments.size() < acceptedArguments) {
+    if(arguments.size() < (unsigned int) acceptedArguments) {
         arguments.push_back(argument);
         return true;
     } 
@@ -58,6 +58,7 @@ AppOption::AppOption ( const string name)
 #ifdef MAP
     cout << "Appel au constructeur de <AppOption>" << endl;
 #endif
+    arguments = vector<string>();
     acceptedArguments = 0;
     if(name == "g") {
         acceptedArguments = 1;
