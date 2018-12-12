@@ -28,6 +28,40 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+int TimeStamp::MonthStringToInt(const string monthString) 
+// Algorithme :
+//
+{
+	int monthConverted = 1;
+
+	if (monthString == "Jan")
+		monthConverted = 1;
+	else if (monthString == "Feb")
+		monthConverted = 2;
+	else if (monthString == "Mar")
+		monthConverted = 3;
+	else if (monthString == "Apr")
+		monthConverted = 4;
+	else if (monthString == "May")
+		monthConverted = 5;
+	else if (monthString == "Jun")
+		monthConverted = 6;
+	else if (monthString == "Jul")
+		monthConverted = 7;
+	else if (monthString == "Aug")
+		monthConverted = 8;
+	else if (monthString == "Sep")
+		monthConverted = 9;
+	else if (monthString == "Oct")
+		monthConverted = 10;
+	else if (monthString == "Nov")
+		monthConverted = 11;
+	else if (monthString == "Dec")
+		monthConverted = 12;
+
+	return monthConverted;
+}
+
 TimeStamp::TimeStamp (uint pDay, uint pMounth, uint pYear, uint pHour,
 uint pMinute, uint pSeconde, uint pTimezone)
 {

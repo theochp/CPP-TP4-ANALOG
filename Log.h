@@ -39,13 +39,7 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Log & operator = ( const Log & unLog );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
+ 
 //-------------------------------------------- Constructeurs - destructeur
     Log (string pIpAddress, TimeStamp pTimeStamp,method pActionType,Url pDestination,
     int pStatus, unsigned int pSizeData, string pSource,string pUserAgent);
@@ -79,6 +73,6 @@ string userAgent;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Log>
-
+eMethod GetMethodFromString(const string methodString);
 #endif // Log_H
 

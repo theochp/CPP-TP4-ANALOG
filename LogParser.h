@@ -11,7 +11,9 @@
 #define LogParser_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <string>
+#include <vector>
+#include "Log.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -28,7 +30,7 @@ class LogParser
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+    vector<Log> Parse ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -36,12 +38,6 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    LogParser & operator = ( const LogParser & unLogParser );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
 //-------------------------------------------- Constructeurs - destructeur
     LogParser ( const LogParser & unLogParser );
@@ -50,7 +46,7 @@ public:
     // Contrat :
     //
 
-    LogParser ( );
+    LogParser ( const string filename );
     // Mode d'emploi :
     //
     // Contrat :
@@ -66,9 +62,10 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-
+	void split(const string &str, char delimiter, vector<string> &elements);
+	void cleanLog(vector<string> &elements);
 //----------------------------------------------------- Attributs protégés
-
+	const string filename;
 };
 
 //-------------------------------- Autres définitions dépendantes de <LogParser>

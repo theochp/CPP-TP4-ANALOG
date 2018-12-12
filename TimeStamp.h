@@ -29,7 +29,7 @@ class TimeStamp
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+    static int MonthStringToInt( const string monthString );
     // Mode d'emploi :
     //
     // Contrat :
