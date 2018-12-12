@@ -17,7 +17,7 @@
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
-typedef enum method {GET, POST, OPTIONS} method;
+typedef enum method {GET, POST, OPTIONS} eMethod;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Log>

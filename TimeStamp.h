@@ -67,5 +67,4 @@ uint timezone;
 
 //-------------------------------- Autres définitions dépendantes de <TimeStamp>
 
-#endif // TimeStamp_H
-
+#endif // TimeStamp_
