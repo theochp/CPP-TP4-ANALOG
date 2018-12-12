@@ -16,7 +16,7 @@
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
-
+typedef unsigned int uint;
 //------------------------------------------------------------------------
 // Rôle de la classe <TimeStamp>
 //
@@ -35,8 +35,8 @@ public:
     // Contrat :
     //
 
-    TimeStamp (unsigned int pDay, unsigned int pMounth, unsigned int pYear, unsigned int pHour,
-    unsigned int pMinute, unsigned int pSeconde, unsigned int pTimezone = 0);
+    TimeStamp (uint pDay, uint pMounth, uint pYear, uint pHour,
+    uint pMinute, uint pSeconde, uint pTimezone = 0);
     // Mode d'emploi :
     //
     // Contrat :
@@ -54,13 +54,13 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-unsigned int day;
-unsigned int mounth;
-unsigned int year;
-unsigned int hour;
-unsigned int minute;
-unsigned int seconde;
-unsigned int timezone;
+uint day;
+uint mounth;
+uint year;
+uint hour;
+uint minute;
+uint seconde;
+uint timezone;
 
 
 };
