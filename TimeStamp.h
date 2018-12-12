@@ -35,6 +35,8 @@ public:
     // Contrat :
     //
 
+    TimeStamp ();
+
     TimeStamp (unsigned int pDay, unsigned int pMounth, unsigned int pYear, unsigned int pHour,
     unsigned int pMinute, unsigned int pSeconde, unsigned int pTimezone = 0);
     // Mode d'emploi :

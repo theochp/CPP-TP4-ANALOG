@@ -28,6 +28,21 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+TimeStamp::TimeStamp ()
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <TimeStamp>" << endl;
+#endif
+    day = 0;
+    mounth = 0;
+    year = 0;
+    hour = 0;
+    minute = 0;
+    seconde = 0;
+    timezone = 0;
+} //----- Fin de TimeStamp
+
+
 TimeStamp::TimeStamp (unsigned int pDay, unsigned int pMounth, unsigned int pYear, unsigned int pHour,
 unsigned int pMinute, unsigned int pSeconde, unsigned int pTimezone)
 {
