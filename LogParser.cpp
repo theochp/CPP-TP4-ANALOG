@@ -1,12 +1,12 @@
 /*************************************************************************
-                           logParser  -  description
+                           LogParser  -  description
                              -------------------
     début                : 12/12/2018
     copyright            : (C) 2018 par Antoine Martinot
     e-mail               : antoine.martinot@insa-lyon.fr
 *************************************************************************/
 
-//---------- Réalisation de la classe <logParser> (fichier logParser.cpp) ------------
+//---------- Réalisation de la classe <LogParser> (fichier LogParser.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,14 +15,14 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "logParser.h"
+#include "LogParser.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type logParser::Méthode ( liste des paramètres )
+// type LogParser::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
@@ -30,7 +30,7 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-logParser & logParser::operator = ( const logParser & unlogParser )
+LogParser & LogParser::operator = ( const LogParser & unLogParser )
 // Algorithme :
 //
 {
@@ -38,34 +38,34 @@ logParser & logParser::operator = ( const logParser & unlogParser )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-logParser::logParser ( const logParser & unlogParser )
+LogParser::LogParser ( const LogParser & unLogParser )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <logParser>" << endl;
+    cout << "Appel au constructeur de copie de <LogParser>" << endl;
 #endif
-} //----- Fin de logParser (constructeur de copie)
+} //----- Fin de LogParser (constructeur de copie)
 
 
-logParser::logParser ( )
+LogParser::LogParser ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <logParser>" << endl;
+    cout << "Appel au constructeur de <LogParser>" << endl;
 #endif
-} //----- Fin de logParser
+} //----- Fin de LogParser
 
 
-logParser::~logParser ( )
+LogParser::~LogParser ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <logParser>" << endl;
+    cout << "Appel au destructeur de <LogParser>" << endl;
 #endif
-} //----- Fin de ~logParser
+} //----- Fin de ~LogParser
 
 
 //------------------------------------------------------------------ PRIVE

@@ -1,14 +1,14 @@
 /*************************************************************************
-                           logParser  -  description
+                           LogParser  -  description
                              -------------------
     début                : 12/12/2018
     copyright            : (C) 2018 par Antoine Martinot
     e-mail               : antoine.martinot@insa-lyon.fr
 *************************************************************************/
 
-//---------- Interface de la classe <logParser> (fichier logParser.h) ----------------
-#if ! defined ( logParser_H )
-#define logParser_H
+//---------- Interface de la classe <LogParser> (fichier LogParser.h) ----------------
+#if ! defined ( LogParser_H )
+#define LogParser_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <logParser>
+// Rôle de la classe <LogParser>
 //
 //
 //------------------------------------------------------------------------
 
-class logParser
+class LogParser
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -36,7 +36,7 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    logParser & operator = ( const logParser & unlogParser );
+    LogParser & operator = ( const LogParser & unLogParser );
     // Mode d'emploi :
     //
     // Contrat :
@@ -44,19 +44,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    logParser ( const logParser & unlogParser );
+    LogParser ( const LogParser & unLogParser );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    logParser ( );
+    LogParser ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~logParser ( );
+    virtual ~LogParser ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -71,7 +71,7 @@ protected:
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <logParser>
+//-------------------------------- Autres définitions dépendantes de <LogParser>
 
-#endif // logParser_H
+#endif // LogParser_H
 
