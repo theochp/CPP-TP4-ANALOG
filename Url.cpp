@@ -30,23 +30,21 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Url & Url::operator = ( const Url & unUrl )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
 
 //-------------------------------------------- Constructeurs - destructeur
-Url::Url ( const Url & unUrl )
+
+Url::Url()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Url>" << endl;
+    cout << "Appel au constructeur de <Url>" << endl;
 #endif
-} //----- Fin de Url (constructeur de copie)
 
+    domain = "";
+    path = "";
+
+} //----- Fin de Url
 
 Url::Url(string pDomain, string pPath)
 // Algorithme :
