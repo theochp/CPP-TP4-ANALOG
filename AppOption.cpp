@@ -51,7 +51,7 @@ AppOption::AppOption ( const AppOption & unAppOption ) : name(unAppOption.name)
 } //----- Fin de AppOption (constructeur de copie)
 
 
-AppOption::AppOption ( const string name)
+AppOption::AppOption ( const string name) : name(name)
 // Algorithme :
 //
 {

@@ -1,37 +1,36 @@
 /*************************************************************************
-                           Log  -  description
+                           LogParser  -  description
                              -------------------
-    début                : 05/12/2018
+    début                : 12/12/2018
     copyright            : (C) 2018 par Antoine Martinot
     e-mail               : antoine.martinot@insa-lyon.fr
 *************************************************************************/
 
-//---------- Interface de la classe <Log> (fichier Log.h) ----------------
-#if ! defined ( Log_H )
-#define Log_H
+//---------- Interface de la classe <LogParser> (fichier LogParser.h) ----------------
+#if ! defined ( LogParser_H )
+#define LogParser_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <cstring>
-#include "Url.h"
-#include "TimeStamp.h"
+#include <string>
+#include <vector>
+#include "Log.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
-typedef enum method {GET, POST, OPTIONS} eMethod;
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Log>
+// Rôle de la classe <LogParser>
 //
 //
 //------------------------------------------------------------------------
 
-class Log
+class LogParser
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+    vector<Log> Parse ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -39,16 +38,21 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
- 
+
 //-------------------------------------------- Constructeurs - destructeur
-    Log (string pIpAddress, TimeStamp pTimeStamp,method pActionType,Url pDestination,
-    int pStatus, unsigned int pSizeData, string pSource,string pUserAgent);
+    LogParser ( const LogParser & unLogParser );
+    // Mode d'emploi (constructeur de copie) :
+    //
+    // Contrat :
+    //
+
+    LogParser ( const string filename );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Log ( );
+    virtual ~LogParser ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -58,21 +62,13 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-
+	void split(const string &str, char delimiter, vector<string> &elements);
+	void cleanLog(vector<string> &elements);
 //----------------------------------------------------- Attributs protégés
-string ipAddress;
-TimeStamp timeStamp;
-method actionType;
-Url destination;
-int status;
-unsigned int sizeData;
-string source;
-string userAgent;
-
-
+	const string filename;
 };
 
-//-------------------------------- Autres définitions dépendantes de <Log>
-eMethod GetMethodFromString(const string methodString);
-#endif // Log_H
+//-------------------------------- Autres définitions dépendantes de <LogParser>
+
+#endif // LogParser_H
 

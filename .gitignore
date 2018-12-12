@@ -1,3 +1,9 @@
 *.o
 bin/*
 .vscode
+.vs
+*.sln
+*.vcxproj*
+*.db
+*.opendb
+Debug

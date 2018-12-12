@@ -30,12 +30,6 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-/*Log & Log::operator = ( const Log & unLog )
-// Algorithme :
-//
-{
-} //----- Fin de operator =*/
-
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -71,3 +65,17 @@ Log::~Log ( )
 
 //----------------------------------------------------- Méthodes protégées
 
+//-------------------------------------- Autre méthodes dépendantes de Log
+eMethod GetMethodFromString(const string methodString)
+{
+	eMethod converted;
+
+	if (methodString == "GET")
+		converted = GET;
+	else if (methodString == "POST")
+		converted = POST;
+	else if (methodString == "OPTIONS")
+		converted = OPTIONS;
+
+	return converted;
+}
