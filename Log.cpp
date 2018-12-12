@@ -40,7 +40,7 @@ Log & Log::operator = ( const Log & unLog )
 //-------------------------------------------- Constructeurs - destructeur
 
 Log::Log (string pIpAddress, TimeStamp pTimeStamp,method pActionType,Url pDestination,
-int pStatus, unsigned int pSizeData, string pSource,string pUserAgent)
+int pStatus, unsigned int pSizeData, string pSource,string pUserAgent) : timeStamp(pTimeStamp)
 // Algorithme :
 //
 {
@@ -48,7 +48,6 @@ int pStatus, unsigned int pSizeData, string pSource,string pUserAgent)
     cout << "Appel au constructeur de <Log>" << endl;
 #endif
     ipAddress = pIpAddress;
-    timeStamp = pTimeStamp;
     actionType = pActionType;
     destination = pDestination;
     status = pStatus;
