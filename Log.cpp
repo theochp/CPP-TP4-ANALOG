@@ -38,15 +38,6 @@ Log & Log::operator = ( const Log & unLog )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Log::Log ( const Log & unLog )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Log>" << endl;
-#endif
-} //----- Fin de Log (constructeur de copie)
-
 
 Log::Log (string pIpAddress, TimeStamp pTimeStamp,method pActionType,Url pDestination,
 int pStatus, unsigned int pSizeData, string pSource,string pUserAgent)

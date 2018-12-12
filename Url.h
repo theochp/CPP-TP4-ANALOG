@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <cstring>
+#include <iostream>
 
 //------------------------------------------------------------- Constantes
 
@@ -37,19 +38,17 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Url & operator = ( const Url & unUrl );
+
+
+
+//-------------------------------------------- Constructeurs - destructeur
+    Url();
     // Mode d'emploi :
     //
     // Contrat :
     //
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    Url ( const Url & unUrl );
-    // Mode d'emploi (constructeur de copie) :
     //
-    // Contrat :
-    //
+
 
     Url(string pDomain, string pPath);
     // Mode d'emploi :

@@ -47,12 +47,6 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Log ( const Log & unLog );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
     Log (string pIpAddress, TimeStamp pTimeStamp,method pActionType,Url pDestination,
     int pStatus, unsigned int pSizeData, string pSource,string pUserAgent);
     // Mode d'emploi :
