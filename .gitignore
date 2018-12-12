@@ -5,3 +5,5 @@ bin/*
 *.sln
 *.vcxproj*
 *.db
+*.opendb
+Debug
