@@ -24,10 +24,11 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-vector<Log> LogParser::Parse ( )
+LogList LogParser::Parse ( )
 // Algorithme :
 //
 {
+	LogList list;
 	ifstream file;
 	file.open(filename);
 	if ((file.rdstate() & ifstream::failbit) != 0)
@@ -39,26 +40,65 @@ vector<Log> LogParser::Parse ( )
 	{
 		string log;
 		vector<string> itemsLog;
-		itemsLog.clear();
 		while (!file.eof()) {
 			getline(file, log);
 			split(log, ' ', itemsLog);
-			cout << "**********************************" << endl;
-			cout << itemsLog.size() << endl;
 			if (itemsLog.size() > 1) {
 				cleanLog(itemsLog);
 				for (int i = 0; i < itemsLog.size(); i++) {
 					TimeStamp t1(stoi(itemsLog[8]), TimeStamp::MonthStringToInt(itemsLog[9]), stoi(itemsLog[10]), stoi(itemsLog[11]),
 						stoi(itemsLog[12]), stoi(itemsLog[13]));
-					Url u1(itemsLog[3], itemsLog[2]);
-					Log l1(itemsLog[0], t1, GetMethodFromString(itemsLog[1]), u1, stoi(itemsLog[4]), stoi(itemsLog[5]), itemsLog[6], itemsLog[7]);
+					string ip = itemsLog[0];
+					string method = itemsLog[1];
+					string destination = itemsLog[2];
+					int status = 0;// stoi(itemsLog[4]);
+					int dataSize = 0;// stoi(itemsLog[5]);
+					string userAgent = itemsLog[7];
+					string source = itemsLog[6]; // TODO: enlever le domaine si la source est locale
+					Log log(ip, t1, GetMethodFromString(method), destination, status, dataSize, source, userAgent);
 
-					cout << itemsLog[i] << endl;
+					// recherche de la destination
+					auto destinationMapElement = list.find(log.destination);
+					if (destinationMapElement == list.end()) {
+						// si la destination est inconnue, on l'insere
+						auto returned = list.insert({ log.destination, {map<string,int>(), 0}});
+						if (returned.second) {
+							destinationMapElement = returned.first;
+						}
+						else {
+							exit(1);
+						}
+					}
+
+					// on recupere les hits pour les sources
+					auto &sources = (*destinationMapElement).second.first;
+					int  &sourceCounts = (*destinationMapElement).second.second;
+					// on incremente le nombre total de hits
+					sourceCounts++;
+
+					// on recherche si la source est déjà connue pour cette destination
+					auto sourceMapElement = sources.find(source);
+					if (sourceMapElement == sources.end()) {
+						// si elle l'est pas on insere
+						auto returned = sources.insert({ log.source, 0 });
+						if (returned.second) {
+							sourceMapElement = returned.first;
+						}
+						else {
+							exit(1);
+						}
+					}
+					
+					// on incremente le nombre de hits depuis cette source
+					(*sourceMapElement).second++;
+
 				}
+				itemsLog.clear();
 			}
-			itemsLog.clear();
 		}
 	}
+
+	return list;
 } //----- Fin de Méthode
 
 
@@ -125,6 +165,16 @@ void LogParser::cleanLog(vector<string> &elements)
 // Algorithme :
 //
 {
+
+	// Fix empty data
+	for (auto it = elements.begin(); it != elements.end(); ++it)
+	{
+		// dans le cas ou une donnée numérique est manquante, il faut remplacer le tiret par un zéro pour que le stoi fonctionne
+		if (*it == "-") {
+			*it = "0";
+		}
+	}
+
 	string itemsTime[7];
 	const string localDomain = "intranet-if.insa-lyon.fr";
 	int pos1, pos2;

@@ -12,7 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <cstring>
-#include "Url.h"
+#include "LogParser.h"
 #include "TimeStamp.h"
 //------------------------------------------------------------- Constantes
 
@@ -41,7 +41,7 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
  
 //-------------------------------------------- Constructeurs - destructeur
-    Log (string pIpAddress, TimeStamp pTimeStamp,method pActionType,Url pDestination,
+    Log (string pIpAddress, TimeStamp pTimeStamp,method pActionType,string pDestination,
     int pStatus, unsigned int pSizeData, string pSource,string pUserAgent);
     // Mode d'emploi :
     //
@@ -63,12 +63,13 @@ protected:
 string ipAddress;
 TimeStamp timeStamp;
 method actionType;
-Url destination;
+string destination;
 int status;
 unsigned int sizeData;
 string source;
 string userAgent;
 
+friend class LogParser;
 
 };
 

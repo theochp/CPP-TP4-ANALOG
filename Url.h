@@ -30,12 +30,17 @@ class Url
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+    string GetDomain( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
+	string GetPath();
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
 
 //------------------------------------------------- Surcharge d'opérateurs
 

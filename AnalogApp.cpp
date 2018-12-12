@@ -16,6 +16,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "AnalogApp.h"
+#include "LogParser.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -26,6 +27,8 @@ int AnalogApp::Run ( )
 // Algorithme :
 //
 {
+	LogParser parser(targetFile);
+	auto list = parser.Parse();
     return 0;
 } //----- Fin de Run
 

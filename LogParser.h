@@ -13,11 +13,12 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
 #include <vector>
+#include <map>
 #include "Log.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
-
+typedef map<string, pair<map<string, int>, int>> LogList;
 //------------------------------------------------------------------------
 // Rôle de la classe <LogParser>
 //
@@ -30,7 +31,7 @@ class LogParser
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    vector<Log> Parse ( );
+    LogList Parse ( );
     // Mode d'emploi :
     //
     // Contrat :

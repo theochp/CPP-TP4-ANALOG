@@ -22,11 +22,19 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Url::Méthode ( liste des paramètres )
+string Url::GetDomain()
 // Algorithme :
 //
-//{
-//} //----- Fin de Méthode
+{
+	return domain;
+} //----- Fin de GetDomain
+
+string Url::GetPath()
+// Algorithme :
+//
+{
+	return path;
+} //----- Fin de GetPath
 
 
 //------------------------------------------------- Surcharge d'opérateurs

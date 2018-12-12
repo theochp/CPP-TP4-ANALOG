@@ -33,7 +33,7 @@ using namespace std;
 
 //-------------------------------------------- Constructeurs - destructeur
 
-Log::Log (string pIpAddress, TimeStamp pTimeStamp,method pActionType,Url pDestination,
+Log::Log (string pIpAddress, TimeStamp pTimeStamp,method pActionType,string pDestination,
 int pStatus, unsigned int pSizeData, string pSource,string pUserAgent) : timeStamp(pTimeStamp)
 // Algorithme :
 //
@@ -68,7 +68,7 @@ Log::~Log ( )
 //-------------------------------------- Autre méthodes dépendantes de Log
 eMethod GetMethodFromString(const string methodString)
 {
-	eMethod converted;
+	eMethod converted = GET;
 
 	if (methodString == "GET")
 		converted = GET;
