@@ -14,6 +14,8 @@
 #include <vector>
 #include <string>
 #include "AppOption.h"
+#include "LogParser.h"
+
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -73,6 +75,12 @@ protected:
         //
         // Contrat :
         //
+
+    void showTopHits (LogList list, int nbPages);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 //----------------------------------------------------- Attributs protégés
 vector<AppOption*> options;

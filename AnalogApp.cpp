@@ -13,6 +13,7 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <deque>
 
 //------------------------------------------------------ Include personnel
 #include "AnalogApp.h"
@@ -125,3 +126,20 @@ void AnalogApp::parseArgs ( const vector<string>& args )
         }
     }
 } //----- Fin de parseArgs
+
+void showTopHits (const LogList& list, int nbPages){
+
+    pair<string, int> p1;
+    p1.first = "lala";
+    p1.second = 12;
+    deque<string, int> d;
+    d.push_back(p1);
+    cout << d[1].first << endl;
+    /*LogList::iterator it;
+
+    deque<string, int> d;
+    for (LogList::iterator it = list.begin(); it != list.end(); ++it){
+        d.push_back(it->first);
+
+    sort(d.begin(), d.end());*/
+}

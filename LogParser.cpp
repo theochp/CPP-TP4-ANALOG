@@ -46,6 +46,7 @@ LogList LogParser::Parse ( )
 			if (itemsLog.size() > 1) {
 				cleanLog(itemsLog);
 				for (int i = 0; i < itemsLog.size(); i++) {
+
 					TimeStamp t1(stoi(itemsLog[8]), TimeStamp::MonthStringToInt(itemsLog[9]), stoi(itemsLog[10]), stoi(itemsLog[11]),
 						stoi(itemsLog[12]), stoi(itemsLog[13]));
 					string ip = itemsLog[0];
@@ -179,30 +180,27 @@ void LogParser::cleanLog(vector<string> &elements)
 	const string localDomain = "intranet-if.insa-lyon.fr";
 	int pos1, pos2;
 
-	itemsTime[0] = elements[1].substr(1, 2);
-	itemsTime[1] = elements[1].substr(4, 3);
-	itemsTime[2] = elements[1].substr(8, 4);
-	itemsTime[3] = elements[1].substr(13, 2);
-	itemsTime[4] = elements[1].substr(16, 2);
-	itemsTime[5] = elements[1].substr(19, 2);
-	itemsTime[6] = elements[2].substr(1, 2);
+	itemsTime[0] = elements[1].substr(1, 2); //jour
+	itemsTime[1] = elements[1].substr(4, 3); //mois
+	itemsTime[2] = elements[1].substr(8, 4); //année
+	itemsTime[3] = elements[1].substr(13, 2); //heure
+	itemsTime[4] = elements[1].substr(16, 2); //minutes
+	itemsTime[5] = elements[1].substr(19, 2); //secondes
+	itemsTime[6] = elements[2].substr(1, 2); //fuseaux
 
-	elements[1] = elements[3].substr(1, elements[3].size() - 1);
-	elements[2] = elements[4];
-	elements[3] = elements[5].substr(0, elements[5].size() - 1);
-	elements[4] = elements[6];
-	elements[5] = elements[7];
+	elements[1] = elements[3].substr(1, elements[3].size() - 1); //methode
+	elements[2] = elements[4]; //destination
+	elements[3] = elements[6]; //status
+	elements[4] = elements[7]; //data size
 
-	pos1 = elements[8].find(1, '/');
+	pos1 = elements[8].find('/', 1);
 	pos1 += 2;
-	pos2 = elements[8].find(pos1 + 1, '/');
+	pos2 = elements[8].find('/', pos1);
 	pos2--;
-	if (elements[8].substr(pos1, pos2) == localDomain)
-		elements[6] = elements[8].substr(pos2 += 1, elements[8].size() - 2);
-	else
-		elements[6] = elements[8].substr(pos1, elements[8].size() - 2);
+    elements[5] = elements[8].substr(pos1, pos2-pos1+1); //domaine
+    elements[6] = elements[8].substr(pos2 += 1, elements[8].size() - pos2-2); //source
 
-	elements[7] = elements[9].substr(1, elements[9].size() - 2);
+	elements[7] = elements[9].substr(1, elements[9].size() - 2); //user agent
 
 	elements[8] = itemsTime[0];
 	elements[9] = itemsTime[1];
@@ -210,4 +208,10 @@ void LogParser::cleanLog(vector<string> &elements)
 	for (int i = 2; i<7; i++) {
 		elements.push_back(itemsTime[i]);
 	}
+
+	//si le log n'as pas de source ou de destination on le prend pas en compte
+	//TODO: voir si l'on garde ceux ayant seulement une destination
+	if (elements[2] == "-" || elements[6] == "-")
+        elements.clear();
+
 } //----- Fin de cleanLog
