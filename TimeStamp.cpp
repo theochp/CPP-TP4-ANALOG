@@ -22,11 +22,9 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type TimeStamp::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+int TimeStamp::GetHour(){
+    return hour;
+}
 
 int TimeStamp::MonthStringToInt(const string monthString) 
 // Algorithme :

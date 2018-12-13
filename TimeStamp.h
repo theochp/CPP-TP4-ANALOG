@@ -29,6 +29,12 @@ class TimeStamp
 
 public:
 //----------------------------------------------------- Méthodes publiques
+    int GetHour();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     static int MonthStringToInt( const string monthString );
     // Mode d'emploi :
     //
