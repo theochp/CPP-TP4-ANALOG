@@ -14,6 +14,7 @@
 #include <vector>
 #include <string>
 #include "AppOption.h"
+#include "LogParser.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -73,6 +74,12 @@ protected:
         //
         // Contrat :
         //
+
+	void generateGraph(LogList &list);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
 
 //----------------------------------------------------- Attributs protégés
 vector<AppOption*> options;
