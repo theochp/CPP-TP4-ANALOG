@@ -81,6 +81,12 @@ protected:
     //
     // Contrat :
     //
+  
+    void generateGraph(LogList &list);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 //----------------------------------------------------- Attributs protégés
 vector<AppOption*> options;

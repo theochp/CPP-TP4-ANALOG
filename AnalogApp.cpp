@@ -14,10 +14,9 @@
 using namespace std;
 #include <iostream>
 #include <deque>
-
+#include <fstream>
 //------------------------------------------------------ Include personnel
 #include "AnalogApp.h"
-#include "LogParser.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -30,6 +29,7 @@ int AnalogApp::Run ( )
 {
 	LogParser parser(targetFile);
 	auto list = parser.Parse();
+	generateGraph(list);
     return 0;
 } //----- Fin de Run
 
@@ -143,3 +143,39 @@ void showTopHits (const LogList& list, int nbPages){
 
     sort(d.begin(), d.end());*/
 }
+
+void AnalogApp::generateGraph(LogList &list)
+// Algorithme :
+//
+{
+	static const string nodePrefix = "\"node_";
+	//TODO: check if file exists
+	vector<string> nodes;
+	vector<string> arcs;
+	for (auto it = list.begin(); it != list.end(); ++it)
+	{
+		string pageName = (*it).first;
+		string node = nodePrefix + pageName + "\" [label=\"" + pageName + "\"];";
+		nodes.push_back(node);
+		const auto &hitsList = (*it).second.first;
+		for (auto it2 = hitsList.begin(); it2 != hitsList.end(); ++it2)
+		{	
+			string referer = (*it2).first;
+			int count  = (*it2).second;
+			string arc = nodePrefix + referer + "\" -> " + nodePrefix + pageName + "\" [label=\"" + to_string(count) + "\"];";
+			arcs.push_back(arc);
+		}
+	}
+	ofstream file("out.dot", ios::out);
+	file << "digraph {" << endl;
+	for (auto it = nodes.begin(); it != nodes.end(); ++it)
+	{
+		file << (*it) << endl;
+	}
+	for (auto it = arcs.begin(); it != arcs.end(); ++it)
+	{
+		file << (*it) << endl;
+	}
+	file << "}" << endl;
+	file.close();
+} //----- Fin de generateGraph
