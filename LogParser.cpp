@@ -45,7 +45,7 @@ LogList LogParser::Parse ( )
 			split(log, ' ', itemsLog);
 			if (itemsLog.size() > 1) {
 				cleanLog(itemsLog);
-				for (int i = 0; i < itemsLog.size(); i++) {
+//				for (int i = 0; i < itemsLog.size(); i++) {
 
 					TimeStamp t1(stoi(itemsLog[8]), TimeStamp::MonthStringToInt(itemsLog[9]), stoi(itemsLog[10]), stoi(itemsLog[11]),
 						stoi(itemsLog[12]), stoi(itemsLog[13]));
@@ -93,7 +93,7 @@ LogList LogParser::Parse ( )
 					// on incremente le nombre de hits depuis cette source
 					(*sourceMapElement).second++;
 
-				}
+				//}
 				itemsLog.clear();
 			}
 		}

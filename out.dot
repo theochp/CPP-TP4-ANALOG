@@ -1,0 +1,11 @@
+digraph {
+"node_/images.jpg" [label="/images.jpg"];
+"node_/temps/4IF1.html" [label="/temps/4IF1.html"];
+"node_/temps/4IF2.html" [label="/temps/4IF2.html"];
+"node_/temps/4IF3.html" [label="/temps/4IF3.html"];
+"node_/temps/4IF3.html" -> "node_/images.jpg" [label="1"];
+"node_/temps/4IF2.html" -> "node_/temps/4IF1.html" [label="1"];
+"node_/temps/4IF1.html" -> "node_/temps/4IF2.html" [label="2"];
+"node_/temps/4IF3.html" -> "node_/temps/4IF2.html" [label="1"];
+"node_/temps/4IF2.html" -> "node_/temps/4IF3.html" [label="1"];
+}
