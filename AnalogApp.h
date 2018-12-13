@@ -76,7 +76,7 @@ protected:
         // Contrat :
         //
 
-    void showTopHits (LogList list, int nbPages);
+    void showTopHits (const LogList& list, int nbDoc = 10);
     // Mode d'emploi :
     //
     // Contrat :

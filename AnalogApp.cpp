@@ -15,6 +15,7 @@ using namespace std;
 #include <iostream>
 #include <deque>
 #include <fstream>
+#include <algorithm>
 //------------------------------------------------------ Include personnel
 #include "AnalogApp.h"
 
@@ -30,6 +31,7 @@ int AnalogApp::Run ( )
 	LogParser parser(targetFile);
 	auto list = parser.Parse();
 	generateGraph(list);
+    showTopHits(list);
     return 0;
 } //----- Fin de Run
 
@@ -127,21 +129,18 @@ void AnalogApp::parseArgs ( const vector<string>& args )
     }
 } //----- Fin de parseArgs
 
-void showTopHits (const LogList& list, int nbPages){
+void AnalogApp::showTopHits (const LogList& list, int nbDoc){
 
-    pair<string, int> p1;
-    p1.first = "lala";
-    p1.second = 12;
-    deque<string, int> d;
-    d.push_back(p1);
-    cout << d[1].first << endl;
-    /*LogList::iterator it;
+    vector<pair<int ,string>> listSorted;
+    for(auto i=list.begin(); i!=list.end(); ++i) {
+        listSorted.push_back(make_pair(i->second.second,i->first));
+    }
+    sort(listSorted.begin(), listSorted.end(),greater<>());
 
-    deque<string, int> d;
-    for (LogList::iterator it = list.begin(); it != list.end(); ++it){
-        d.push_back(it->first);
-
-    sort(d.begin(), d.end());*/
+    int iDoc =1;
+    for(auto i=listSorted.begin(); i!=listSorted.end() && iDoc++<=nbDoc; ++i) {
+        cout << i->second << " (" << i->first << " hits)" << endl;
+    }
 }
 
 void AnalogApp::generateGraph(LogList &list)
