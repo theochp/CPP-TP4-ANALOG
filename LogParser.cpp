@@ -148,16 +148,23 @@ void LogParser::split(const string &str, char delimiter, vector<string> &element
 	stringstream ss(str);
 	while (getline(ss, item, delimiter))
 	{
-		if (nbItem != 2 && nbItem != 3 && nbItem < 12)
-			elements.push_back(item);
+		if (item != "") {
+            if (nbItem != 2 && nbItem != 3 && nbItem < 12)
+                elements.push_back(item);
 
-		nbItem++;
+            nbItem++;
+        }
 	}
 	for (int i = 0; i < 11; i++) {
 		pos1 = str.find(delimiter, pos1 + 1);
 	}
 	item = str.substr(pos1 + 1, str.size());
 	elements.push_back(item);
+
+    //si le log n'as pas de source ou de destination on le prend pas en compte
+    if (elements[4] == "-" || elements[4] == "/")
+        elements.clear();
+
 } //----- Fin de split
 
 void LogParser::cleanLog(vector<string> &elements)
@@ -175,28 +182,52 @@ void LogParser::cleanLog(vector<string> &elements)
 	}
 
 	string itemsTime[7];
-	const string localDomain = "intranet-if.insa-lyon.fr";
 	int pos1, pos2;
 
-	itemsTime[0] = elements[1].substr(1, 2); //jour
-	itemsTime[1] = elements[1].substr(4, 3); //mois
-	itemsTime[2] = elements[1].substr(8, 4); //année
-	itemsTime[3] = elements[1].substr(13, 2); //heure
-	itemsTime[4] = elements[1].substr(16, 2); //minutes
-	itemsTime[5] = elements[1].substr(19, 2); //secondes
-	itemsTime[6] = elements[2].substr(1, 2); //fuseaux
+	if(elements[1].size() == 21){
+        itemsTime[0] = elements[1].substr(1, 2); //jour
+        itemsTime[1] = elements[1].substr(4, 3); //mois
+        itemsTime[2] = elements[1].substr(8, 4); //année
+        itemsTime[3] = elements[1].substr(13, 2); //heure
+        itemsTime[4] = elements[1].substr(16, 2); //minutes
+        itemsTime[5] = elements[1].substr(19, 2); //secondes
+        itemsTime[6] = elements[2].substr(1, 2); //fuseaux
+	}else{
+        itemsTime[0] = "-";
+        itemsTime[1] = "-";
+        itemsTime[2] = "-";
+        itemsTime[3] = "-";
+        itemsTime[4] = "-";
+        itemsTime[5] = "-";
+        itemsTime[6] = "-";
+	}
 
-	elements[1] = elements[3].substr(1, elements[3].size() - 1); //methode
+    if(elements[3] != "\"-\""){
+        elements[1] = elements[3].substr(1, elements[3].size() - 1); //methode
+    }else{
+        elements[1] = elements[3];
+    }
 	elements[2] = elements[4]; //destination
 	elements[3] = elements[6]; //status
 	elements[4] = elements[7]; //data size
 
-	pos1 = elements[8].find('/', 1);
-	pos1 += 2;
-	pos2 = elements[8].find('/', pos1);
-	pos2--;
-    elements[5] = elements[8].substr(pos1, pos2-pos1+1); //domaine
-    elements[6] = elements[8].substr(pos2 += 1, elements[8].size() - pos2-2); //source
+	if (elements[8] != "\"-\""){
+        pos1 = elements[8].find('/', 1);
+        pos1 += 2;
+        pos2 = elements[8].find('/', pos1);
+        if (pos2 != -1) {
+            pos2--;
+            elements[5] = elements[8].substr(pos1, pos2 - pos1 + 1); //domaine
+            elements[6] = elements[8].substr(pos2 += 1, elements[8].size() - pos2 - 2); //source
+        }else{
+            elements[5] = elements[8].substr(pos1, elements[8].size()- pos1 - 1); //domaine
+            elements[6] = elements[5]; //source
+        }
+
+	}else{
+        elements[5] = "-";
+        elements[6] = "-";
+	}
 
 	elements[7] = elements[9].substr(1, elements[9].size() - 2); //user agent
 
@@ -206,10 +237,5 @@ void LogParser::cleanLog(vector<string> &elements)
 	for (int i = 2; i<7; i++) {
 		elements.push_back(itemsTime[i]);
 	}
-
-	//si le log n'as pas de source ou de destination on le prend pas en compte
-	//TODO: voir si l'on garde ceux ayant seulement une destination
-	if (elements[2] == "-" || elements[6] == "-")
-        elements.clear();
 
 } //----- Fin de cleanLog
