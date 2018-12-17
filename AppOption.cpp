@@ -34,7 +34,15 @@ bool AppOption::AddArgument ( string argument )
     return false;
 } //----- Fin de Méthode
 
+string AppOption::getName() const
+{
+	return name;
+}
 
+vector<string> AppOption::getArguments() const
+{
+	return arguments;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 

@@ -28,7 +28,7 @@ int AnalogApp::Run ( )
 // Algorithme :
 //
 {
-	LogParser parser(targetFile);
+	LogParser parser(options, targetFile);
 	auto list = parser.Parse();
 	generateGraph(list);
     showTopHits(list);

@@ -41,6 +41,7 @@ LogList LogParser::Parse ( )
 		string log;
 		vector<string> itemsLog;
 		while (!file.eof()) {
+			itemsLog.clear();
 			getline(file, log);
 			split(log, ' ', itemsLog);
 			if (itemsLog.size() > 1) {
@@ -56,6 +57,22 @@ LogList LogParser::Parse ( )
                 string userAgent = itemsLog[7];
                 string source = itemsLog[6]; // TODO: enlever le domaine si la source est locale
                 Log log(ip, t1, GetMethodFromString(method), destination, status, dataSize, source, userAgent);
+
+				// filter images
+				bool shouldIgnoreLog = false;
+				for (auto it = options.begin(); it != options.end(); ++it)
+				{
+					if ((*it)->getName() == "e" && isAssetUrl(log.destination))
+					{
+						shouldIgnoreLog = true;
+					}
+				}
+
+				if (shouldIgnoreLog)
+				{
+					continue;
+				}
+
 
                 // recherche de la destination
                 auto destinationMapElement = list.find(log.destination);
@@ -91,8 +108,6 @@ LogList LogParser::Parse ( )
 
                 // on incremente le nombre de hits depuis cette source
                 (*sourceMapElement).second++;
-
-				itemsLog.clear();
 			}
 		}
 	}
@@ -104,7 +119,7 @@ LogList LogParser::Parse ( )
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-LogParser::LogParser ( const LogParser & unLogParser )
+LogParser::LogParser ( const LogParser & unLogParser ) : filename(unLogParser.filename), options(options)
 // Algorithme :
 //
 {
@@ -114,7 +129,7 @@ LogParser::LogParser ( const LogParser & unLogParser )
 } //----- Fin de LogParser (constructeur de copie)
 
 
-LogParser::LogParser ( const string filename ) : filename(filename)
+LogParser::LogParser (vector<AppOption*> options, const string filename) : filename(filename), options(options)
 // Algorithme :
 //
 {
@@ -239,3 +254,31 @@ void LogParser::cleanLog(vector<string> &elements)
 	}
 
 } //----- Fin de cleanLog
+
+bool LogParser::isAssetUrl(const string url)
+// Algorithme :
+//
+{
+	const char *extensions[] = {
+		".jpg",
+		".jpeg",
+		".png",
+		".gif",
+		".bmp",
+		".svg",
+		".ico",
+		".css",
+		".js"
+	};
+	int extensions_t = sizeof(extensions) / sizeof(char*);
+	bool isAsset = false;
+	size_t position;
+	for (int i = 0; i < extensions_t && !isAsset; ++i) {
+		position = url.find(extensions[i]);
+		if (position == url.size() - strlen(extensions[i])) {
+			isAsset = true;
+		}
+	}
+
+	return isAsset;
+} //----- Fin de isAssetUrl

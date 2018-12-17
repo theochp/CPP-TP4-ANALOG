@@ -15,6 +15,7 @@
 #include <vector>
 #include <map>
 #include "Log.h"
+#include "AppOption.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -47,7 +48,7 @@ public:
     // Contrat :
     //
 
-    LogParser ( const string filename );
+    LogParser (vector<AppOption*> options, const string filename );
     // Mode d'emploi :
     //
     // Contrat :
@@ -65,8 +66,14 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 	void split(const string &str, char delimiter, vector<string> &elements);
 	void cleanLog(vector<string> &elements);
+
+	bool isAssetUrl(const string url);
+	// Contrat :
+	// Retourne VRAI si <url> pointe vers un fichier de ressources
+	// (.css, .js, .png, .jpg,...)
 //----------------------------------------------------- Attributs protégés
 	const string filename;
+	const vector<AppOption*> options;
 };
 
 //-------------------------------- Autres définitions dépendantes de <LogParser>

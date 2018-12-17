@@ -54,6 +54,10 @@ public:
     // Contrat :
     //
 
+	string getName() const;
+
+	vector<string> getArguments() const;
+
     virtual ~AppOption ( );
     // Mode d'emploi :
     //
