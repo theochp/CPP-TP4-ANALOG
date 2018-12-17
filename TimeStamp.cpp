@@ -22,7 +22,8 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-int TimeStamp::GetHour(){
+int TimeStamp::GetHour() const
+{
     return hour;
 }
 

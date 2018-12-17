@@ -15,6 +15,7 @@
 #include <vector>
 #include <map>
 #include "Log.h"
+#include "TimeStamp.h"
 #include "AppOption.h"
 //------------------------------------------------------------- Constantes
 
@@ -71,6 +72,10 @@ protected:
 	// Contrat :
 	// Retourne VRAI si <url> pointe vers un fichier de ressources
 	// (.css, .js, .png, .jpg,...)
+
+	bool isHourValid(const TimeStamp time, const string hour);
+	// Contrat :
+	// Retourne vrai si le timestamp <time> est dans l'interval [<hour>, <hour>+1]
 //----------------------------------------------------- Attributs protégés
 	const string filename;
 	const vector<AppOption*> options;

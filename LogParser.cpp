@@ -66,6 +66,11 @@ LogList LogParser::Parse ( )
 					{
 						shouldIgnoreLog = true;
 					}
+
+					if ((*it)->getName() == "t" && !isHourValid(log.timeStamp, (*it)->getArguments()[0]))
+					{
+						shouldIgnoreLog = true;
+					}
 				}
 
 				if (shouldIgnoreLog)
@@ -282,3 +287,22 @@ bool LogParser::isAssetUrl(const string url)
 
 	return isAsset;
 } //----- Fin de isAssetUrl
+
+bool LogParser::isHourValid(const TimeStamp time, const string hour)
+{
+	try {
+		int h = stoi(hour);
+
+		if (time.GetHour() == h)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	catch (exception e) {
+		return false;
+	}
+}

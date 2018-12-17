@@ -29,7 +29,7 @@ class TimeStamp
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    int GetHour();
+    int GetHour() const;
     // Mode d'emploi :
     //
     // Contrat :
