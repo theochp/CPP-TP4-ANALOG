@@ -135,7 +135,9 @@ void AnalogApp::showTopHits (const LogList& list, int nbDoc){
     for(auto i=list.begin(); i!=list.end(); ++i) {
         listSorted.push_back(make_pair(i->second.second,i->first));
     }
-    sort(listSorted.begin(), listSorted.end(),greater<>());
+	sort(listSorted.begin(), listSorted.end(), [](pair<int,string> &left, pair<int, string> &right) {
+		return left.first > right.first;
+	});
 
     int iDoc =1;
     for(auto i=listSorted.begin(); i!=listSorted.end() && iDoc++<=nbDoc; ++i) {
