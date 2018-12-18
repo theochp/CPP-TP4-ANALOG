@@ -157,9 +157,9 @@ void AnalogApp::showTopHits (const LogList& list, int nbDoc){
 		return left.first > right.first;
 	});
 
-    int iDoc =1;
-    for(auto i=listSorted.begin(); i!=listSorted.end() && iDoc++<=nbDoc; ++i) {
-        cout << i->second << " (" << i->first << " hits)" << endl;
+	int cpt = 0;
+	for (auto it = listSorted.begin(); it != listSorted.end() && cpt < nbDoc; ++it, ++cpt) {
+        cout << it->second << " (" << it->first << " hits)" << endl;
     }
 }
 
