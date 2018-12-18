@@ -124,7 +124,7 @@ LogList LogParser::Parse ( )
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-LogParser::LogParser ( const LogParser & unLogParser ) : filename(unLogParser.filename), options(options)
+LogParser::LogParser ( const LogParser & unLogParser ) : filename(unLogParser.filename), options(unLogParser.options)
 // Algorithme :
 //
 {
@@ -162,7 +162,7 @@ void LogParser::split(const string &str, char delimiter, vector<string> &element
 //
 {
 	string item;
-	int nbItem = 1, pos1 = 1, pos2;
+	int nbItem = 1, pos1 = 1;
 
 
 	stringstream ss(str);
@@ -238,7 +238,7 @@ void LogParser::cleanLog(vector<string> &elements)
         if (pos2 != -1) {
             pos2--;
             elements[5] = elements[8].substr(pos1, pos2 - pos1 + 1); //domaine
-            elements[6] = elements[8].substr(pos2 += 1, elements[8].size() - pos2 - 2); //source
+            elements[6] = elements[8].substr(pos2 + 1, elements[8].size() - pos2 - 2); //source
         }else{
             elements[5] = elements[8].substr(pos1, elements[8].size()- pos1 - 1); //domaine
             elements[6] = elements[5]; //source
