@@ -82,7 +82,7 @@ protected:
     // Contrat :
     //
   
-    void generateGraph(LogList &list);
+    void generateGraph(const string outputFilename, LogList &list);
     // Mode d'emploi :
     //
     // Contrat :

@@ -30,8 +30,26 @@ int AnalogApp::Run ( )
 {
 	LogParser parser(options, targetFile);
 	auto list = parser.Parse();
-	generateGraph(list);
     showTopHits(list);
+
+	bool doGenerateGraph = false;
+	string outputFilename;
+	for (auto it = options.begin(); it != options.end() && !doGenerateGraph; ++it)
+	{
+		if ((*it)->getName() == "g")
+		{
+			if ((*it)->getArguments().size() > 0)
+				outputFilename = (*it)->getArguments()[0];
+			else
+				outputFilename = "out.dot";
+			doGenerateGraph = true;
+		}
+	}
+	if (doGenerateGraph)
+	{
+		generateGraph(outputFilename, list);
+	}
+	
     return 0;
 } //----- Fin de Run
 
@@ -145,7 +163,7 @@ void AnalogApp::showTopHits (const LogList& list, int nbDoc){
     }
 }
 
-void AnalogApp::generateGraph(LogList &list)
+void AnalogApp::generateGraph(const string outputFilename, LogList &list)
 // Algorithme :
 //
 {
@@ -167,7 +185,7 @@ void AnalogApp::generateGraph(LogList &list)
 			arcs.push_back(arc);
 		}
 	}
-	ofstream file("out.dot", ios::out);
+	ofstream file(outputFilename, ios::out);
 	file << "digraph {" << endl;
 	for (auto it = nodes.begin(); it != nodes.end(); ++it)
 	{
