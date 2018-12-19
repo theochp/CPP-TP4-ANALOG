@@ -67,7 +67,7 @@ LogList LogParser::Parse ( )
 						shouldIgnoreLog = true;
 					}
 
-					if ((*it)->getName() == "t" && !isHourValid(log.timeStamp, (*it)->getArguments()[0]))
+					if ((*it)->getName() == "t" && (*it)->getArguments().size() > 0 && !isHourValid(log.timeStamp, (*it)->getArguments()[0]))
 					{
 						shouldIgnoreLog = true;
 					}
