@@ -75,5 +75,9 @@ friend class LogParser;
 
 //-------------------------------- Autres définitions dépendantes de <Log>
 eMethod GetMethodFromString(const string methodString);
+// Mode d'emploi :
+// Méthode qui va convertir un string en un élément de l'énumération eMethod
+
+
 #endif // Log_H
 

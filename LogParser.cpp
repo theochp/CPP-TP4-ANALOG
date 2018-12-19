@@ -181,7 +181,7 @@ void LogParser::split(const string &str, char delimiter, vector<string> &element
 	item = str.substr(pos1 + 1, str.size());
 	elements.push_back(item);
 
-    //si le log n'as pas de source ou de destination on le prend pas en compte
+    //si le log n'as pas de destination on le prend pas en compte
     if (elements[4] == "-" || elements[4] == "/")
         elements.clear();
 
