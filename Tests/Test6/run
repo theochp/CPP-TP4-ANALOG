@@ -1,0 +1,1 @@
+../../bin/analog logs.log -g out.dot

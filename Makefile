@@ -1,22 +1,15 @@
 SRC_FILES := $(wildcard *.cpp)
+H_FILES := $(wildcard *.h)
 OBJ_FILES := $(patsubst %.cpp,build/%.o,$(SRC_FILES))
-GPP_ARGS  := -std=c++11
+GPP_ARGS  := -std=c++11 -Wall -Werror -pedantic
 
-bin/release: $(OBJ_FILES)
-	$(eval OBJ_FILES := $(subst build/main_test.o,,${OBJ_FILES}))
-	g++ $(GPP_ARGS) $(OBJ_FILES) -o bin/release
+bin/analog: $(OBJ_FILES) $(H_FILES)
+	g++ $(GPP_ARGS) $(OBJ_FILES) -o $@
 
 debug: bin/debug
-bin/debug: GPP_ARGS += -g -Wall -Werror -pedantic -DMAP
-bin/debug: $(OBJ_FILES)
-	$(eval OBJ_FILES := $(subst build/main_test.o,,${OBJ_FILES}))
-	g++ $(GPP_ARGS) $(OBJ_FILES) -o bin/debug
-
-test: bin/test
-bin/test: GPP_ARGS += -g -Wall -Werror -pedantic -DMAP
-bin/test: $(OBJ_FILES)
-	$(eval OBJ_FILES := $(subst build/main.o,,${OBJ_FILES}))
-	g++ $(GPP_ARGS) $(OBJ_FILES) -o bin/test
+bin/debug: GPP_ARGS += -g -DMAP
+bin/debug: $(OBJ_FILES) $(H_FILES)
+	g++ $(GPP_ARGS) $(OBJ_FILES) -o $@
 
 build/%.o: %.cpp
 	g++ -c $(GPP_ARGS) $< -o $@
