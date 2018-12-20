@@ -72,13 +72,14 @@ protected:
 //----------------------------------------------------- Méthodes protégées
     void parseArgs ( const vector<string>& args );
     // Mode d'emploi :
-        //
+		// Analyse les arguments du programme pour et alimente la variable
+        // privée <option>
         // Contrat :
         //
 
     void showTopHits (const LogList& list, int nbDoc = 10);
     // Mode d'emploi :
-    //
+	//
     // Contrat :
     //
   

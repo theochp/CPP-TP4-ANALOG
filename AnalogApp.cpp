@@ -167,8 +167,27 @@ void AnalogApp::generateGraph(const string outputFilename, LogList &list)
 // Algorithme :
 //
 {
+	ifstream testFile(outputFilename);
+	if (testFile.is_open())
+	{
+		
+		string answer = "";
+		do
+		{
+			cout << "Fichier <" << outputFilename << "> déjà existant, voulez vous l'écraser ? (O/N)" << endl;
+			cin >> answer;
+		} while (answer != "O" && answer != "N");
+
+		if (answer == "N") {
+			cout << "Veuillez entrer un nouveau nom de fichier" << endl;
+			cin >> answer;
+			return generateGraph(answer, list);
+		}
+
+	}
+	testFile.close();
+
 	static const string nodePrefix = "\"node_";
-	//TODO: check if file exists
 	vector<string> nodes;
 	vector<string> arcs;
 	for (auto it = list.begin(); it != list.end(); ++it)
